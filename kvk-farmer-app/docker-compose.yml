@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - FLASK_ENV=production
+    volumes:
+      - ./backend/models:/app/models
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
